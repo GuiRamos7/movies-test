@@ -23,6 +23,7 @@ const Home = () => {
       gap='10'
       gridTemplateColumns='repeat( auto-fit, minmax(250px, 1fr) );'
       mt='20'
+      alignItems='center'
     >
       {movies.map((movie) => (
         <MovieItem

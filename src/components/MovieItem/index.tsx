@@ -14,7 +14,7 @@ interface IMovieIcon {
 const MovieItem = ({ id, title, description, image, rate }: IMovieIcon) => {
   return (
     <Link to={`/movie/${id}`}>
-      <Flex direction='column' borderRadius='17px' w='250px'>
+      <Flex direction='column' borderRadius='17px' w='250px' m='auto'>
         <Image
           borderRadius='17px'
           src={`https://image.tmdb.org/t/p/original/${image}`}
