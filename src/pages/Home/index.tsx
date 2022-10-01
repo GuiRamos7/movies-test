@@ -1,23 +1,51 @@
 import { useEffect, useState } from 'react';
-import { Box, Flex, Grid } from '@chakra-ui/react';
+import { Box, Flex, Grid, Skeleton } from '@chakra-ui/react';
 import { MovieItem } from 'components';
 import { api } from 'services/api';
+import { usePopularMovies } from 'services/hooks/usePopularMovies';
 
-interface IMovie {
+interface IMovieIcon {
   id: string;
   title: string;
-  overview: string;
-  poster_path: string;
-  vote_average: string;
+  description: string;
+  image: string;
+  rate: string;
 }
 
 const Home = () => {
-  const [movies, setMovies] = useState<Array<IMovie>>([]);
-  useEffect(() => {
-    api.get('/movie/popular').then((mv) => {
-      setMovies(mv.data.results);
-    });
-  }, []);
+  const { data, isLoading } = usePopularMovies();
+
+  if (isLoading) {
+    return (
+      <Grid
+        gap='10'
+        gridTemplateColumns='repeat( auto-fit, minmax(250px, 1fr) );'
+        mt='20'
+        alignItems='center'
+      >
+        {Array.from(Array(10).keys()).map(() => (
+          <Box>
+            <Skeleton height='375px' w='250px' fadeDuration={4} color='white' />
+            <Skeleton
+              mt='5'
+              height='17px'
+              w='250px'
+              fadeDuration={4}
+              color='white'
+            />
+            <Skeleton
+              mt='5'
+              height='17px'
+              w='250px'
+              fadeDuration={4}
+              color='white'
+            />
+          </Box>
+        ))}
+      </Grid>
+    );
+  }
+
   return (
     <Grid
       gap='10'
@@ -25,7 +53,7 @@ const Home = () => {
       mt='20'
       alignItems='center'
     >
-      {movies.map((movie) => (
+      {data?.movies.map((movie) => (
         <MovieItem
           key={movie.id}
           description={movie.overview}
