@@ -22,8 +22,8 @@ export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)',
-        color: 'gray.900',
+        bg: 'gray.900',
+        color: 'gray.50',
         h: '100vh',
       },
     },
