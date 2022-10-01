@@ -1,4 +1,4 @@
 import Header from './Header';
-import MovieIcon from './MovieIcon';
+import MovieItem from './MovieItem';
 
-export { Header, MovieIcon };
+export { Header, MovieItem };
