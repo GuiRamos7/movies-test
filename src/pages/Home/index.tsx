@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Box, Flex, Grid, Skeleton } from '@chakra-ui/react';
+import { Box, Grid, Skeleton } from '@chakra-ui/react';
 import { MovieItem } from 'components';
-import { api } from 'services/api';
 import { usePopularMovies } from 'services/hooks/usePopularMovies';
-
-interface IMovieIcon {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  rate: string;
-}
+import { useDispatch } from 'react-redux';
+import { selectMovie } from 'reducers';
 
 const Home = () => {
   const { data, isLoading } = usePopularMovies();
+  const dispatch = useDispatch();
 
   if (isLoading) {
     return (
@@ -61,6 +54,7 @@ const Home = () => {
           id={movie.id}
           title={movie.title}
           rate={movie.vote_average}
+          onClick={() => dispatch(selectMovie(movie))}
         />
       ))}
     </Grid>

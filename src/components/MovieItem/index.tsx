@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { AiFillStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import './styles.css';
@@ -9,11 +9,19 @@ interface IMovieIcon {
   description: string;
   image: string;
   rate: string;
+  onClick: () => void;
 }
 
-const MovieItem = ({ id, title, description, image, rate }: IMovieIcon) => {
+const MovieItem = ({
+  id,
+  title,
+  description,
+  image,
+  rate,
+  onClick,
+}: IMovieIcon) => {
   return (
-    <Link to={`/movie/${id}`}>
+    <Link to={`/movie/${id}`} onClick={onClick}>
       <Flex direction='column' borderRadius='17px' w='250px' m='auto'>
         <Image
           borderRadius='17px'
