@@ -14,7 +14,7 @@ type GetPopularMoviesResponse = {
 };
 
 export const getPopularMovies = async (): Promise<GetPopularMoviesResponse> => {
-  const { data } = await api.get('/movie/popular');
+  const { data } = await api.get('/movie/popular', { params: { page: 1 } });
 
   const movies = data.results.map((movie: Movie) => ({
     id: movie.id,
