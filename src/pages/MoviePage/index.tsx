@@ -34,10 +34,10 @@ const MoviePage = () => {
     <Flex
       w='100%'
       mt='10'
-      p='20'
+      p={['5', '10', '20']}
       className='cover-image '
       backgroundImage={`https://image.tmdb.org/t/p/original/${data?.movie.backdrop_path}`}
-      flexDirection='column-reverse'
+      flexDirection={['column', 'column-reverse', 'column-reverse']}
       zIndex='1'
       backgroundSize='cover'
     >
@@ -45,45 +45,54 @@ const MoviePage = () => {
       <Flex
         position='relative'
         zIndex='2'
-        mt='auto'
+        mt={'auto'}
         w='100%'
         my='6'
         maxW={1480}
         mx='auto'
-        px='6'
+        px={['0', '0', '6']}
         direction='column'
       >
-        <Text fontSize='5xl' color='white' fontWeight='bold'>
+        <Text fontSize={['3xl', '4xl', '5xl']} color='white' fontWeight='bold'>
           {data?.movie.title}
         </Text>
-        <Flex align='center'>
+        <Flex
+          align={['start', 'start', 'center']}
+          flexDirection={['column', 'column', 'row']}
+        >
           <Flex align='center'>
             <AiFillStar fill='#ffd200' fontSize='25px' />
             <Text as='p' fontSize='xl' ml='2'>
               {data?.movie.vote_average} | {data?.movie.vote_count}
             </Text>
           </Flex>
-          <Flex ml='10'>
-            <Text as='p' fontSize='xl' ml='2'>
+          <Flex ml={['0', '0', '10']}>
+            <Text as='p' fontSize={['md', 'lg', 'xl']} ml='2'>
               {data?.movie.runtime}min &#8226; {genres} &#8226;{' '}
               {convertDate(data?.movie.release_date ?? '')}
             </Text>
           </Flex>
         </Flex>
-        <Flex w='70%' mt='10' fontSize='2xl'>
+        <Flex
+          w={['100%', '100%', '70%']}
+          mt='10'
+          fontSize={['lg', 'xl', '2xl']}
+        >
           {data?.movie.overview}
         </Flex>
-        <Flex mt='10'>
+        <Flex mt='10' flexDirection={['column', 'column', 'row']}>
           <Button
             mr='5'
             leftIcon={<HiPlay />}
             bg='blue.500'
             fontSize='xl'
+            mt='5'
             fontWeight='normal'
           >
             Play now
           </Button>
           <Button
+            mt='5'
             fontWeight='normal'
             fontSize='xl'
             leftIcon={!isFavorite() ? <HiBookmark /> : <HiOutlineX />}

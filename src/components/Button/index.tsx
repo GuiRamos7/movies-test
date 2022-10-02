@@ -7,7 +7,8 @@ const Button = ({ ...props }: ButtonProps) => {
       {...props}
       height='48px'
       minWidth='240px'
-      w='auto'
+      w='100%'
+      maxWidth='340px'
       _hover={{
         opacity: 0.7,
       }}
