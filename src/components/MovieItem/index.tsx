@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 
 interface IMovieIcon {
-  id: string;
+  id: number;
   title: string;
   description: string;
   image: string;

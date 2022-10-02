@@ -1,3 +1,4 @@
 import Home from './Home';
+import MoviePage from './MoviePage';
 
-export { Home };
+export { Home, MoviePage };

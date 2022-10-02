@@ -1,0 +1,22 @@
+.cover-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: center;
+  height: calc(100vh - 145px);
+}
+
+.gradient {
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, 
+  to(rgba(0,0,0,1)), from(rgb(0 0 0 / 10%)));
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+     background: #181b23;
+}

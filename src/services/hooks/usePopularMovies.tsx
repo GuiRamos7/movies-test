@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { api } from 'services/api';
 
 type Movie = {
-  id: string;
+  id: number;
   title: string;
   overview: string;
   poster_path: string;

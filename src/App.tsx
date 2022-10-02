@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { Header } from 'components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home } from 'pages';
+import { Home, MoviePage } from 'pages';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/movie/:id' element={<Home />} />
+          <Route path='/movie/:id' element={<MoviePage />} />
         </Routes>
       </Box>
     </Router>

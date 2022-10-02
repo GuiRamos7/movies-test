@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const popularMovies = createSlice({
-  name: 'popularMovies',
+  name: 'movies',
   initialState: {
     movieSelected: null,
   },
   reducers: {
     selectMovie: (state, action) => {
+      console.log(action);
       state.movieSelected = action.payload;
     },
   },
