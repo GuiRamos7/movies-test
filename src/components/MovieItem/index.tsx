@@ -31,7 +31,7 @@ const MovieItem = ({
           w='250px'
           h='375'
         />
-        <Text as='h1' fontSize='2xl' fontWeight='700' mt='2'>
+        <Text as='h1' fontSize='xl' fontWeight='700' mt='2' h='45'>
           {title}
         </Text>
         <Text
