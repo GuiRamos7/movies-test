@@ -1,27 +1,34 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Button, Flex, Text } from '@chakra-ui/react';
-import { HiBookmark, HiPlay } from 'react-icons/hi';
-
-import { useGetMovieDetails } from 'services/hooks/useGetMovieDetails';
-import type { RootState } from 'config/store';
-import './styles.css';
+import { Flex, Text } from '@chakra-ui/react';
+import React, { useCallback } from 'react';
 import { AiFillStar } from 'react-icons/ai';
+import { HiBookmark, HiOutlineX, HiPlay } from 'react-icons/hi';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from 'components';
+import type { RootState } from 'config/store';
+import { addFavorites, removeFavorites } from 'reducers';
+import { useGetMovieDetails } from 'services/hooks/useGetMovieDetails';
 import { convertDate } from 'utils/convertData';
+import './styles.css';
 
 const MoviePage = () => {
-  const count = useSelector((state: RootState) => state.movies.movieSelected);
-  const { data, isLoading, isError } = useGetMovieDetails(count ?? 0);
+  const movieID = useSelector((state: RootState) => state.movies.movieSelected);
+  const { data, isLoading, isError } = useGetMovieDetails(movieID ?? 0);
+  const favorites = useSelector((state: RootState) => state.movies.favorites);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const genres = data?.movie.genres.map((el) => el.name).join(', ');
 
-  console.log(isError);
+  const isFavorite = useCallback(() => {
+    const moviesIsFavorite = favorites.find((el) => el.id === movieID);
+
+    return moviesIsFavorite;
+  }, [favorites]);
 
   if (isError) {
     navigate('/');
   }
-
-  const genres = data?.movie.genres.map((el) => el.name).join(', ');
 
   return (
     <Flex
@@ -71,28 +78,29 @@ const MoviePage = () => {
             mr='5'
             leftIcon={<HiPlay />}
             bg='blue.500'
-            height='48px'
-            width='240px'
             fontSize='xl'
             fontWeight='normal'
-            _hover={{
-              opacity: 0.7,
-            }}
           >
             Play now
           </Button>
           <Button
-            bg='gray.100'
-            height='48px'
-            width='240px'
             fontWeight='normal'
             fontSize='xl'
-            _hover={{
-              opacity: 0.7,
-            }}
-            leftIcon={<HiBookmark />}
+            leftIcon={!isFavorite() ? <HiBookmark /> : <HiOutlineX />}
+            bg={!isFavorite() ? 'gray.100' : 'orange.500'}
+            onClick={() =>
+              !isFavorite()
+                ? dispatch(
+                    addFavorites({
+                      title: data?.movie.title ?? '',
+                      image: data?.movie.poster_path ?? '',
+                      id: movieID ?? 0,
+                    })
+                  )
+                : dispatch(removeFavorites(movieID ?? 0))
+            }
           >
-            Save on your list
+            {!isFavorite() ? 'Save on your list' : 'Remove from your list'}
           </Button>
         </Flex>
       </Flex>

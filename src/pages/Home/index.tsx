@@ -4,13 +4,9 @@ import { MovieItem } from 'components';
 import { usePopularMovies } from 'services/hooks/usePopularMovies';
 import { useDispatch } from 'react-redux';
 import { selectMovie } from 'reducers';
-import { useGetMovieDetails } from 'services/hooks/useGetMovieDetails';
-import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const { data, isLoading } = usePopularMovies();
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   if (isLoading) {
