@@ -24,7 +24,7 @@ type GetMovieDetailsResponse = {
 };
 
 export const getMovieDetails = async (
-  id: number
+  id: number | string
 ): Promise<GetMovieDetailsResponse> => {
   const { data } = await api.get(`/movie/${id}`);
 
@@ -44,10 +44,9 @@ export const getMovieDetails = async (
   return { movie };
 };
 
-export const useGetMovieDetails = (id: number) => {
+export const useGetMovieDetails = (id: number | string) => {
   return useQuery('movie', () => getMovieDetails(id), {
     refetchOnWindowFocus: false,
     refetchInterval: 1000 * 60 * 60,
-    retry: false,
   });
 };

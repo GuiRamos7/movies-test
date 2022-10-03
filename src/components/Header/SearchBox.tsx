@@ -1,7 +1,7 @@
 import { Flex, Icon, Input, Image, Text } from '@chakra-ui/react';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { RiSearchLine, RiCloseFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSearchMovies } from 'services/hooks/useSearchMovies';
 import { convertDate } from 'utils/convertData';
 import useDebounce from 'utils/useDebounce';
@@ -14,6 +14,7 @@ const SearchBox = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (searchValue.length > 1) {
@@ -72,19 +73,19 @@ const SearchBox = () => {
             zIndex='5'
           >
             {data?.movies.map((movie) => (
-              <Flex
-                px='8'
-                key={movie.id}
-                _hover={{ background: 'gray.700' }}
-                w='100%'
-              >
-                <Link style={{ width: '100%' }} to={`/movie/${movie.id}`}>
+              <a href={`/movie/${movie.id}`}>
+                <Flex
+                  px='8'
+                  key={movie.id}
+                  _hover={{ background: 'gray.700' }}
+                  w='100%'
+                >
                   <Flex py='2' justify='space-between' w='100%'>
                     <Text>{movie.title}</Text>
                     <Text>{convertDate(movie.release_date)}</Text>
                   </Flex>
-                </Link>
-              </Flex>
+                </Flex>
+              </a>
             ))}
 
             {isLoading && (

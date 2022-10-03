@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { HiBookmark, HiOutlineX, HiPlay } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,9 @@ import './styles.css';
 
 const MoviePage = () => {
   const movieID = useSelector((state: RootState) => state.movies.movieSelected);
-  const { data, isError } = useGetMovieDetails(movieID ?? 0);
+  const { data, isError } = useGetMovieDetails(
+    window.location.pathname.split('/')[2] ?? movieID
+  );
   const favorites = useSelector((state: RootState) => state.movies.favorites);
   const navigate = useNavigate();
   const dispatch = useDispatch();
