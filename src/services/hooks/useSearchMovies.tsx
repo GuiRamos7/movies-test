@@ -7,28 +7,30 @@ type Movie = {
   overview: string;
   poster_path: string;
   vote_average: string;
+  release_date: string;
 };
 
 type SearchMoviesResponse = {
   movies: Array<Movie>;
 };
 
-export const searchMovies = async (search: string): Promise<any> => {
+export const searchMovies = async (
+  search: string
+): Promise<SearchMoviesResponse> => {
   const { data } = await api.get('/search/movie', {
-    params: { query: 'Orphan: First Kill' },
+    params: { query: search },
   });
 
-  console.log(data);
+  const movies = data.results.map((movie: Movie) => ({
+    id: movie.id,
+    title: movie.title,
+    overview: movie.overview,
+    poster_path: movie.poster_path,
+    vote_average: movie.vote_average,
+    release_date: movie.release_date,
+  }));
 
-  // const movies = data.results.map((movie: Movie) => ({
-  //   id: movie.id,
-  //   title: movie.title,
-  //   overview: movie.overview,
-  //   poster_path: movie.poster_path,
-  //   vote_average: movie.vote_average,
-  // }));
-
-  return {};
+  return { movies };
 };
 
 export const useSearchMovies = () => {
