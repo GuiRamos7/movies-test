@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Box, Grid, Skeleton } from '@chakra-ui/react';
 import { MovieItem } from 'components';
 import { usePopularMovies } from 'services/hooks/usePopularMovies';
 import { useDispatch } from 'react-redux';
 import { selectMovie } from 'reducers';
+import { useInfiniteQuery } from 'react-query';
 import { api } from 'services/api';
 import { TypeMovie } from 'services/hooks/usePopularMovies';
 
@@ -49,6 +50,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    console.log('page ----------------------', page);
     fetchNextPage({ pageParam: page });
   }, [page]);
 
