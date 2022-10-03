@@ -1,18 +1,22 @@
 import { Flex, Icon, Input } from '@chakra-ui/react';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { RiSearchLine } from 'react-icons/ri';
+import { useSearchMovies } from 'services/hooks/useSearchMovies';
 import useDebounce from 'utils/useDebounce';
 
 const SearchBox = () => {
   const [searchValue, setSearchValue] = useState('');
   const debouncedValue = useDebounce<string>(searchValue);
+  const { data, mutate } = useSearchMovies();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
   useEffect(() => {
-    console.log('bala');
+    if (searchValue.length > 0) {
+      mutate(searchValue);
+    }
   }, [debouncedValue]);
 
   return (
@@ -39,6 +43,10 @@ const SearchBox = () => {
         onChange={handleChange}
       />
       <Icon as={RiSearchLine} fontSize='20' />
+
+      <Flex>
+        <div></div>
+      </Flex>
     </Flex>
   );
 };

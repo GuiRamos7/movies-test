@@ -14,7 +14,7 @@ import './styles.css';
 
 const MoviePage = () => {
   const movieID = useSelector((state: RootState) => state.movies.movieSelected);
-  const { data, isLoading, isError } = useGetMovieDetails(movieID ?? 0);
+  const { data, isError } = useGetMovieDetails(movieID ?? 0);
   const favorites = useSelector((state: RootState) => state.movies.favorites);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const MoviePage = () => {
     const moviesIsFavorite = favorites.find((el) => el.id === movieID);
 
     return moviesIsFavorite;
-  }, [favorites]);
+  }, [favorites, movieID]);
 
   if (isError) {
     navigate('/');

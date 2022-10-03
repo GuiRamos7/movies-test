@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { api } from 'services/api';
 
 type Genre = {
@@ -27,8 +27,6 @@ export const getMovieDetails = async (
   id: number
 ): Promise<GetMovieDetailsResponse> => {
   const { data } = await api.get(`/movie/${id}`);
-
-  console.log('data', data);
 
   const movie = {
     id: data.id,

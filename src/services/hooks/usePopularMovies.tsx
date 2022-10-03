@@ -1,7 +1,7 @@
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { api } from 'services/api';
 
-type Movie = {
+export type TypeMovie = {
   id: number;
   title: string;
   overview: string;
@@ -10,13 +10,16 @@ type Movie = {
 };
 
 type GetPopularMoviesResponse = {
-  movies: Array<Movie>;
+  movies: Array<TypeMovie>;
 };
 
-export const getPopularMovies = async (): Promise<GetPopularMoviesResponse> => {
-  const { data } = await api.get('/movie/popular', { params: { page: 1 } });
-
-  const movies = data.results.map((movie: Movie) => ({
+const getPopularMovies = async ({ pageParam }: any) => {
+  const {
+    data: { page, results, total_pages },
+  } = await api.get(`/movie/popular`, {
+    params: { page: pageParam ?? 1 },
+  });
+  const movies = results.map((movie: TypeMovie) => ({
     id: movie.id,
     title: movie.title,
     overview: movie.overview,
@@ -24,11 +27,13 @@ export const getPopularMovies = async (): Promise<GetPopularMoviesResponse> => {
     vote_average: movie.vote_average,
   }));
 
-  return { movies };
+  return { page, movies, total_pages };
 };
 
 export const usePopularMovies = () => {
-  return useQuery('popularMovies', () => getPopularMovies(), {
-    staleTime: 1000 * 60 * 15, // 15 minutes
+  return useInfiniteQuery('popularMovies', getPopularMovies, {
+    getNextPageParam: (lastPage, pages) => ({ lastPage, pages }),
+    staleTime: 1000 * 60 * 15,
+    retry: false,
   });
 };
