@@ -2,7 +2,7 @@ import { Flex, Icon, Input, Text } from '@chakra-ui/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { RiSearchLine, RiCloseFill } from 'react-icons/ri';
 import { useSearchMovies } from 'services/hooks/useSearchMovies';
-import { convertDate } from 'utils/convertData';
+import { getYear } from 'utils/convertData';
 import useDebounce from 'utils/useDebounce';
 import { Loading } from 'components';
 
@@ -79,7 +79,7 @@ const SearchBox = () => {
                 >
                   <Flex py='2' justify='space-between' w='100%'>
                     <Text>{movie.title}</Text>
-                    <Text>{convertDate(movie.release_date)}</Text>
+                    <Text>{getYear(movie.release_date)}</Text>
                   </Flex>
                 </Flex>
               </a>
