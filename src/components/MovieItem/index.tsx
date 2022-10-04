@@ -23,43 +23,37 @@ const MovieItem = ({
 }: IMovieIcon) => {
   return (
     <Link to={`/movie/${id}`} onClick={onClick}>
-      <motion.div
-        initial={{ opacity: 0, x: '-30px' }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Flex direction='column' borderRadius='17px' w='250px' m='auto'>
-          <Image
-            borderRadius='17px'
-            src={`https://image.tmdb.org/t/p/original/${image}`}
-            loading='lazy'
-            alt={`Poster of ${title} movie`}
-            w='250px'
-            h='375px'
-            maxW='250px'
-            maxH='375px'
-            objectFit='cover'
-          />
-          <Text as='h1' fontSize='xl' fontWeight='700' mt='2' h='45'>
-            {title}
+      <Flex direction='column' borderRadius='17px' w='250px' m='auto'>
+        <Image
+          borderRadius='17px'
+          src={`https://image.tmdb.org/t/p/original/${image}`}
+          loading='lazy'
+          alt={`Poster of ${title} movie`}
+          w='250px'
+          h='375px'
+          maxW='250px'
+          maxH='375px'
+          objectFit='cover'
+        />
+        <Text as='h1' fontSize='xl' fontWeight='700' mt='2' h='45'>
+          {title}
+        </Text>
+        <Text
+          className='description'
+          as='h1'
+          fontSize='xl'
+          py='2'
+          lineHeight='1.7'
+        >
+          {description}
+        </Text>
+        <Flex align='center'>
+          <AiFillStar fill='#ffd200' fontSize='25px' />
+          <Text as='p' fontSize='xl' fontWeight='700' ml='2'>
+            {rate}
           </Text>
-          <Text
-            className='description'
-            as='h1'
-            fontSize='xl'
-            py='2'
-            lineHeight='1.7'
-          >
-            {description}
-          </Text>
-          <Flex align='center'>
-            <AiFillStar fill='#ffd200' fontSize='25px' />
-            <Text as='p' fontSize='xl' fontWeight='700' ml='2'>
-              {rate}
-            </Text>
-          </Flex>
         </Flex>
-      </motion.div>
+      </Flex>
     </Link>
   );
 };
