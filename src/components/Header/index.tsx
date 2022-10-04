@@ -13,8 +13,6 @@ const Header = () => {
     lg: true,
   });
 
-  const onOpen = false;
-
   return (
     <Flex
       maxWidth={1480}

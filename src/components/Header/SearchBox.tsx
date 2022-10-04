@@ -1,7 +1,6 @@
-import { Flex, Icon, Input, Image, Text } from '@chakra-ui/react';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { Flex, Icon, Input, Text } from '@chakra-ui/react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { RiSearchLine, RiCloseFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
 import { useSearchMovies } from 'services/hooks/useSearchMovies';
 import { convertDate } from 'utils/convertData';
 import useDebounce from 'utils/useDebounce';
@@ -14,13 +13,11 @@ const SearchBox = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
-  let navigate = useNavigate();
-
   useEffect(() => {
     if (searchValue.length > 1) {
       mutate(searchValue);
     }
-  }, [debouncedValue]);
+  }, [debouncedValue, mutate, searchValue]);
 
   return (
     <>

@@ -4,7 +4,6 @@ import { MovieItem } from 'components';
 import { usePopularMovies } from 'services/hooks/usePopularMovies';
 import { useDispatch } from 'react-redux';
 import { selectMovie } from 'reducers';
-import { api } from 'services/api';
 import { TypeMovie } from 'services/hooks/usePopularMovies';
 
 const Home = () => {
@@ -13,13 +12,11 @@ const Home = () => {
 
   const {
     data,
-    error,
     isLoading,
     fetchNextPage,
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    status,
   } = usePopularMovies();
 
   const dispatch = useDispatch();

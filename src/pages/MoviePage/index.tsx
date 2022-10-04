@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { HiBookmark, HiOutlineX, HiPlay } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
