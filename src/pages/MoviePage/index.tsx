@@ -38,7 +38,7 @@ const MoviePage = () => {
       w='100%'
       mt='10'
       p={['5', '10', '20']}
-      className='cover-image '
+      className='cover-image'
       backgroundImage={`https://image.tmdb.org/t/p/original/${data?.movie.backdrop_path}`}
       flexDirection={['column', 'column-reverse', 'column-reverse']}
       zIndex='1'

@@ -35,7 +35,10 @@ const MovieItem = ({
             loading='lazy'
             alt={`Poster of ${title} movie`}
             w='250px'
-            h='375'
+            h='375px'
+            maxW='250px'
+            maxH='375px'
+            objectFit='cover'
           />
           <Text as='h1' fontSize='xl' fontWeight='700' mt='2' h='45'>
             {title}
